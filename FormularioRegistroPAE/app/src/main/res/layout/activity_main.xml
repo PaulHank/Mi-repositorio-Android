@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lytContainer"
+    android:layout_width= "fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_gravity="bottom">
+
+    <TableLayout
+        android:layout_width= "wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="top"
+        android:stretchColumns="0,1">
+
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/lblName"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name" />
+
+            <TextView
+                android:id="@+id/lblSurname"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/surname" />
+        </TableRow>
+
+        <TableRow>
+
+            <EditText
+                android:id="@+id/txtName"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/txtSurname"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/lblPassword"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/password" />
+
+            <TextView
+                android:id="@+id/lblRepeatPassword"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rPassword" />
+        </TableRow>
+
+        <TableRow>
+
+            <EditText
+                android:id="@+id/txtPassword"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/txtRepeatPassword"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/lblTelephone"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/telephone" />
+
+            <TextView
+                android:id="@+id/lblBD"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/birthDate" />
+        </TableRow>
+
+        <TableRow>
+
+            <EditText
+                android:id="@+id/txtTelephone"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/txtBD"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/lblCountry"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/country" />
+
+            <TextView
+                android:id="@+id/lblEmail"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/email" />
+        </TableRow>
+
+        <TableRow>
+
+            <TableRow>
+                <Spinner
+                android:id="@+id/cmbOpciones"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content" />
+
+                <TextView
+                android:id="@+id/lblCountryRes"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""/>
+            </TableRow>
+
+
+            <EditText
+                android:id="@+id/txtEmail"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/lblSex"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sex" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width= "wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/RB1"
+                    android:layout_width= "wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/male" />
+
+                <RadioButton
+                    android:id="@+id/RB2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/female" />
+            </RadioGroup>
+
+        </TableRow>
+
+        <TableRow>
+
+            <CheckBox
+                android:id="@+id/chkFeed"
+                android:layout_width= "fill_parent"
+                android:layout_height="fill_parent"
+                android:checked="false"
+                android:text="@string/feed" />
+        </TableRow>
+
+        <TableRow>
+
+            <Button
+                android:id="@+id/btnAccept"
+                android:layout_width= "fill_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/accept" />
+
+            <Button
+                android:id="@+id/btnExit"
+                android:layout_width= "fill_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/exit" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Formulario de registro PAE</string>
+
+    <string name="name">* Nombre</string>
+    <string name="surname">* Apellidos</string>
+
+    <string name="password">* Contraseña</string>
+    <string name="rPassword">* Repetir contraseña</string>
+
+    <string name="telephone">Teléfono</string>
+    <string name="birthDate">Fecha de nacimiento</string>
+
+    <string name="country">Pais</string>
+    <string name="email">* Correo electronico</string>
+
+    <string name="sex">* Sexo</string>
+    <string name="male">Hombre</string>
+    <string name="female">Mujer</string>
+
+    <string name="feed">Recibir boletín de noticias</string>
+
+    <string name="accept">Aceptar</string>
+    <string name="exit">Salir</string>
+</resources>

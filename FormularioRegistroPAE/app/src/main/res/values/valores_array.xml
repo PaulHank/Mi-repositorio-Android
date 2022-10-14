@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="values_array">
+        <item>España</item>
+        <item>Españita</item>
+        <item>Galicia</item>
+        <item>Arriba España</item>
+        <item>ESPAÑAAAA</item>
+    </string-array>
+</resources>
