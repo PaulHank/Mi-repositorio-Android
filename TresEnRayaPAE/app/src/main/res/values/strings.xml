@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TresEnRayaPAE</string>
+    <string name="cambiar_ficha">Cambiar Ficha</string>
+    <string name="victory">Han ganado las fichas</string>
+    <string name ="limpiar_casillas">Nueva partida</string>
+    <string name = "OCAF">Oye, esto ya esta lleno, tramposo >:(</string>
+</resources>
