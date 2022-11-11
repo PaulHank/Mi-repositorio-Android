@@ -10,7 +10,10 @@
     android:background="#CBCBCB"
     tools:context=".MainActivity">
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> da20b1c4d207cb03b35f1f601f3cee404a16e832
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -37,7 +40,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+<<<<<<< HEAD
             android:id="@+id/Username"
+=======
+            android:id="@+id/password"
+>>>>>>> da20b1c4d207cb03b35f1f601f3cee404a16e832
             android:textColor="#FFFFFF"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -54,12 +61,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+<<<<<<< HEAD
             android:id="@+id/password"
+=======
+            android:id="@+id/Username"
+>>>>>>> da20b1c4d207cb03b35f1f601f3cee404a16e832
             android:textColor="#FFFFFF"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword" />
 
+<<<<<<< HEAD
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="47dp" >
@@ -87,6 +99,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+=======
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/login"
+            android:textColor="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blueborder"
+            android:text="LOGIN" />
+>>>>>>> da20b1c4d207cb03b35f1f601f3cee404a16e832
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
