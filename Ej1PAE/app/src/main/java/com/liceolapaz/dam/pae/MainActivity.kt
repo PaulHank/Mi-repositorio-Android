@@ -2,7 +2,6 @@ package com.liceolapaz.dam.pae
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-<<<<<<< HEAD
 import android.view.View.VISIBLE
 import android.widget.Button
 import android.widget.EditText
@@ -50,12 +49,5 @@ class MainActivity : AppCompatActivity() {
 
             startActivity(intent)
         }
-=======
-
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
->>>>>>> da20b1c4d207cb03b35f1f601f3cee404a16e832
     }
 }
