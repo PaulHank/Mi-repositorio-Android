@@ -2,4 +2,7 @@
     <string name="app_name">Ej1PAE</string>
     <string name="username"></string>
     <string name="password"></string>
+    <string name="action_buscar">Buscar</string>
+    <string name="action_nuevo">New</string>
+    <string name="action_opciones">Opciones</string>
 </resources>
