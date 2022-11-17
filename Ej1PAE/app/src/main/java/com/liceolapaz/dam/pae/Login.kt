@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
+import android.view.Window
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.text.TextUtils
-import android.view.View
-import android.widget.*
 import com.liceolapaz.dam.pae.R.id
 import kotlin.system.exitProcess
 
@@ -25,30 +23,30 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login)
 
-        errorDisp = findViewById(R.id.errorDisp)
-        login = findViewById(R.id.login)
-        password = findViewById(R.id.password)
-        username = findViewById(R.id.Username)
+        errorDisp = findViewById(id.errorDisp)
+        login = findViewById(id.login)
+        password = findViewById(id.password)
+        username = findViewById(id.Username)
 
-        var numIntentos = 3;
+
 
         login.setOnClickListener {
             val intent = Intent(this@Login, DB::class.java)
+            var numIntentos = 3;
+            if (numIntentos == 0) {
+                exitProcess(0)
+            }
 
             if (!password.text.contentEquals("liceo") || !username.text.contentEquals("admin")) {
                 username.setText("")
                 password.setText("")
-                errorDisp.text = "El nombre de usuario u contraseña es incorrecto."
+                errorDisp.text = "El usuario y/u contraseña incorrecto."
                 errorDisp.visibility = VISIBLE
                 numIntentos--
             } else {
                 errorDisp.visibility == INVISIBLE
                 errorDisp.text = ""
                 startActivity(intent)
-            }
-
-            if (numIntentos == 0) {
-                exitProcess(0)
             }
         }
     }
