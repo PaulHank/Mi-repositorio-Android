@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contenedor"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/NombreJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NJ"
+        app:layout_constraintBottom_toTopOf="@+id/PrecioJugador"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/PrecioJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PrecioJ"
+        app:layout_constraintTop_toBottomOf="@id/NombreJugador"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/PosicionJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PosicionJ"
+        app:layout_constraintBottom_toTopOf="@id/PuntosJugador"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/PuntosJugador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PuntosJ"
+        app:layout_constraintTop_toBottomOf="@id/PosicionJugador"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

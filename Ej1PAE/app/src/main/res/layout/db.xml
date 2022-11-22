@@ -15,23 +15,40 @@
         layout="@layout/toolbar" />
 
     <!--
-    Puedo meter el scrollview dentro de un layout que contenga
-    un textfield arriba del todo donde el numero de jugadores
-    es indicado
-
     Jesus me ha dicho que use un tipo de lista,
     RecyclerView parecen las mejores
     https://www.youtube.com/watch?v=5xXTTdTAdU8
     -->
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/compress"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/blueborder"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BarraDeNavegacion" />
+        app:layout_constraintTop_toBottomOf="@+id/BarraDeNavegacion">
+
+        <TextView
+            android:id="@+id/numeroJugadores"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/compress"
+            app:layout_constraintStart_toStartOf="@id/compress"
+            app:layout_constraintTop_toTopOf="@id/compress"
+            app:layout_constraintBottom_toTopOf="@id/JugadoresRecyclerView"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/JugadoresRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="@id/compress"
+            app:layout_constraintEnd_toEndOf="@id/compress"
+            app:layout_constraintStart_toStartOf="@id/compress"
+            app:layout_constraintTop_toBottomOf="@id/numeroJugadores"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
