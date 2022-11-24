@@ -33,6 +33,8 @@
             android:id="@+id/numeroJugadores"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:textAlignment="viewEnd"
+            android:text="TEST"
             app:layout_constraintEnd_toEndOf="@id/compress"
             app:layout_constraintStart_toStartOf="@id/compress"
             app:layout_constraintTop_toTopOf="@id/compress"

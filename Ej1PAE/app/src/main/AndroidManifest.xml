@@ -36,7 +36,7 @@
         </activity>
 
         <activity
-            android:name=".CrearUsuarios"
+            android:name=".CrearJugador"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"

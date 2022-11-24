@@ -13,8 +13,8 @@ class JugadorViewHolder(view:View):RecyclerView.ViewHolder(view){
 
     fun noseque(jugadorAlgo:Jugador) {
         nombreJu.text = jugadorAlgo.nombre
-        precioJu.text = jugadorAlgo.precio.toString()
+        precioJu.text = jugadorAlgo.precio.toString() + " €"
         posicionJu.text = jugadorAlgo.posicion
-        puntosJu.text = jugadorAlgo.puntos.toString()
+        puntosJu.text = jugadorAlgo.puntos.toString() + " puntos"
     }
 }

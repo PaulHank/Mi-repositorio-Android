@@ -20,6 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PrecioJ"
+        android:textColor="@color/white"
+        android:textFontWeight="500"
         app:layout_constraintTop_toBottomOf="@id/NombreJugador"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -38,6 +40,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PuntosJ"
+        android:textColor="@color/white"
+        android:textFontWeight="500"
         app:layout_constraintTop_toBottomOf="@id/PosicionJugador"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

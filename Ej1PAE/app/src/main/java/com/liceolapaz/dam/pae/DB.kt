@@ -1,45 +1,58 @@
 package com.liceolapaz.dam.pae
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.liceolapaz.dam.pae.JugadorProvider.Companion.listaJugadores
+import com.liceolapaz.dam.pae.databinding.DbBinding
 
-// users\minicuenta\appdata\local\android\sdk\platform-tools
+// C:\users\minicuenta\appdata\local\android\sdk\platform-tools
 // adb connect localhost:5555
 class DB: AppCompatActivity() {
 
-    fun initRecyclerView(){
-        val recyclerView = findViewById<RecyclerView>(R.id.JugadoresRecyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = JugadorAdapter(JugadorProvider.listaJugadores)
+    private lateinit var binding: DbBinding
+
+    private fun initRecyclerView(){
+        binding.JugadoresRecyclerView.layoutManager = LinearLayoutManager(this)
+        binding.JugadoresRecyclerView.adapter = JugadorAdapter(listaJugadores)
     }
 
+    @SuppressLint("SetTextI18n")
     fun checkNumPlayers() {
-        val textbox = findViewById<TextView>(R.id.numeroJugadores)
-        textbox.text = "?"
-        TODO("Encontrar como llamar a la funcion getItemCount en este plano para enseñar cuantos jugadores hay en total")
+        binding.numeroJugadores.text = "Numero de jugadores: " + listaJugadores.size
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.db)
+        binding = DbBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initRecyclerView()
+        checkNumPlayers()
 
-        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.BarraDeNavegacion)
-        setSupportActionBar(toolbar)
+        /*
+        Explicacion de este root de abajo:
+        Cuando creas un binding.algo, ese objeto deja de ser ese algo y pasa a ser un
+        "AlgoBinding", lo cual puede romper cosas, en mi caso, se cargo la toolbar en si.
+        No todos los objetos a los que se les haga binding dejaran de funcionar, por ejemplo
+        el textbox de arriba esta funcionando como debe sin necesidad de un .root, que ademas
+        no puede usar como tal.
 
-        toolbar.setOnMenuItemClickListener {
+        Con la etiqueta .root, haces que se obtenga el objeto "Superior",
+        que es Algo en si, en este caso, una toolbar.
+        */
+
+        setSupportActionBar(binding.BarraDeNavegacion.root)
+        binding.BarraDeNavegacion.root.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.añadir -> {
                     Log.i("ActionBar", "Añadir")
 
-                    val intent = Intent(this@DB, CrearUsuarios::class.java)
+                    val intent = Intent(this@DB, CrearJugador::class.java)
                     startActivity(intent)
                     true
                 }
@@ -48,23 +61,23 @@ class DB: AppCompatActivity() {
                 }
             }
         }
-        toolbar.inflateMenu(R.menu.menu)
+        binding.BarraDeNavegacion.root.inflateMenu(R.menu.menu)
         supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
-        override fun onCreateOptionsMenu(menu: Menu): Boolean {
-            menuInflater.inflate(R.menu.menu, menu)
-            return true
-        }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
 
-        override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-            R.id.añadir -> {
-                Log.i("ActionBar", "Nuevo!")
-                true
-            }
-            else -> {
-                super.onOptionsItemSelected(item)
-            }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.añadir -> {
+            Log.i("ActionBar", "Nuevo!")
+            true
+        }
+        else -> {
+            super.onOptionsItemSelected(item)
         }
     }
+}
 
