@@ -14,4 +14,11 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <string-array name="posicion">
+        <item>Portero (PT)</item>
+        <item>Defensa (DF)</item>
+        <item>Mediocampista (MC)</item>
+        <item>Delantero (DL)</item>
+    </string-array>
+
 </resources>

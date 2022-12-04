@@ -1,30 +1,54 @@
 package com.liceolapaz.dam.pae
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.liceolapaz.dam.pae.JugadorProvider.Companion.listaJugadores
+import com.liceolapaz.dam.pae.jugador.JugadorProvider.Companion.listaJugadores
 import com.liceolapaz.dam.pae.databinding.DbBinding
+import com.liceolapaz.dam.pae.jugador.Jugador
+import com.liceolapaz.dam.pae.jugador.JugadorAdapter
 
 // C:\users\minicuenta\appdata\local\android\sdk\platform-tools
 // adb connect localhost:5555
+
 class DB: AppCompatActivity() {
 
     private lateinit var binding: DbBinding
+    private var listaJugadoresEditable:MutableList<Jugador> = listaJugadores.toMutableList()
+    private lateinit var adapter: JugadorAdapter
 
     private fun initRecyclerView(){
-        binding.JugadoresRecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.JugadoresRecyclerView.adapter = JugadorAdapter(listaJugadores)
+        adapter = JugadorAdapter(listaJugadores = listaJugadoresEditable,
+        onClickListener = { jugador ->  onJugadorSelected(jugador) })
+
+
+        val mana = LinearLayoutManager(this)
+        val decoration = DividerItemDecoration(this, mana.orientation)
+        binding.JugadoresRecyclerView.layoutManager = mana
+        binding.JugadoresRecyclerView.addItemDecoration(decoration)
+
+        binding.JugadoresRecyclerView.adapter = adapter
     }
 
-    @SuppressLint("SetTextI18n")
-    fun checkNumPlayers() {
+    private  fun onJugadorSelected(jugador: Jugador) {
+        Toast.makeText(this,jugador.nombre, Toast.LENGTH_SHORT).show()
+        val intent = Intent(this@DB, EditarJugador::class.java)
+        startActivity(intent)
+    }
+
+    private fun checkNumPlayers() {
         binding.numeroJugadores.text = "Numero de jugadores: " + listaJugadores.size
+    }
+
+    private fun onDeletedPlayer(position:Int) {
+        listaJugadoresEditable.removeAt(position)
+        adapter.notifyItemRemoved(position)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,4 +104,3 @@ class DB: AppCompatActivity() {
         }
     }
 }
-
