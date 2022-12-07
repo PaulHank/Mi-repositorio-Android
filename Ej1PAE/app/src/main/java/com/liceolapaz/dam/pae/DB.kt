@@ -46,11 +46,6 @@ class DB: AppCompatActivity() {
         binding.numeroJugadores.text = "Numero de jugadores: " + listaJugadores.size
     }
 
-    private fun onDeletedPlayer(position:Int) {
-        listaJugadoresEditable.removeAt(position)
-        adapter.notifyItemRemoved(position)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DbBinding.inflate(layoutInflater)
