@@ -7,6 +7,7 @@ import com.liceolapaz.dam.pae.R
 
 class JugadorViewHolder(view:View):RecyclerView.ViewHolder(view){
 
+    private val codigoJu : TextView = view.findViewById(R.id.CodigoJugador)
     private val nombreJu: TextView = view.findViewById(R.id.NombreJugador)
     private val precioJu: TextView = view.findViewById(R.id.PrecioJugador)
     private val posicionJu: TextView = view.findViewById(R.id.PosicionJugador)
@@ -16,6 +17,7 @@ class JugadorViewHolder(view:View):RecyclerView.ViewHolder(view){
         jugadorAlgo: Jugador,
         onClickListener: (Jugador) -> Unit
     ) {
+        codigoJu.text = jugadorAlgo.codigo.toString()
         nombreJu.text = jugadorAlgo.nombre
         precioJu.text = jugadorAlgo.precio.toString() + " €"
         posicionJu.text = jugadorAlgo.posicion

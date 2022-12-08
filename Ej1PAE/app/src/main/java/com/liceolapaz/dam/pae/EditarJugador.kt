@@ -2,6 +2,7 @@ package com.liceolapaz.dam.pae
 
 import android.app.Activity
 import android.content.DialogInterface
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.view.View
@@ -11,14 +12,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.liceolapaz.dam.pae.databinding.EditarJugadorBinding
 import com.liceolapaz.dam.pae.jugador.Jugador
 import com.liceolapaz.dam.pae.jugador.JugadorAdapter
-import com.liceolapaz.dam.pae.jugador.JugadorProvider
 
 class EditarJugador: AppCompatActivity() {
 
     private lateinit var binding: EditarJugadorBinding
-    private var listaJugadoresEditable:MutableList<Jugador> = JugadorProvider.listaJugadores.toMutableList()
+    private var updater = DB().listaJugadores.toMutableList()
     private lateinit var adapter: JugadorAdapter
-    private lateinit var db: SQLiteDatabase
+    private lateinit var dataBase: SQLiteDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,24 +54,60 @@ class EditarJugador: AppCompatActivity() {
 
         //Base de datos abierta
         val bdd = BaseDeDatos(this, "BaseDeJugadores", null, 1)
-        db = bdd.writableDatabase
+        dataBase = bdd.writableDatabase
+
+        val cursor : Cursor = dataBase.rawQuery("SELECT * FROM Jugadores WHERE 'codigo' =3",null)
+        if (cursor.moveToFirst()) {
+            binding.CodigoEdit.setText(cursor.getInt(0))
+            binding.NombreEdit.setText(cursor.getString(1))
+            binding.PrecioEdit.setText(cursor.getInt(2))
+            binding.PuntosEdit.setText(cursor.getInt(4))
+        }
 
         //Boton de aceptar
-
         binding.aceptar.setOnClickListener {
             crearDialogoAceptar()
         }
 
         //Boton de cancelar
-
         binding.cancelar.setOnClickListener {
             crearDialogoCancelar()
         }
+
+        //Boton de eliminar
+        binding.eliminar.setOnClickListener {
+            crearDialogoEliminar()
+        }
+    }
+
+    private fun crearDialogoEliminar() {
+        val builder = android.app.AlertDialog.Builder(this@EditarJugador)
+        builder.setTitle("Aceptar")
+        builder.setMessage("El jugador se eliminará de la base de datos, ¿continuar?")
+        builder.setPositiveButton("Si", object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface, which: Int) {
+                deleteJugador()
+            }
+
+            private fun deleteJugador() {
+                val codigo = binding.CodigoEdit.text.toString()
+
+                val sql = "DELETE jugador WHERE codigo='$codigo'"
+                dataBase.execSQL(sql)
+
+            }
+        })
+            .setNegativeButton("No") { _, _ -> finish() }
+            .setNeutralButton("Cancelar" ) { dialog, _ -> dialog.dismiss() }
+
+        val dialog = builder.create()
+        dialog.show()
     }
 
     private fun crearDialogoCancelar() {
         val builder = android.app.AlertDialog.Builder(this@EditarJugador)
         builder.setTitle("Cancelar")
+        builder.setMessage("Los cambios no se aplicarán, ¿quieres continuar?")
         builder.setPositiveButton("Si") { _, _ -> finish() }
         builder.setNegativeButton("No") { dialog, _ -> dialog.dismiss() }
 
@@ -86,6 +122,7 @@ class EditarJugador: AppCompatActivity() {
         builder.setPositiveButton("Si", object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface, which: Int) {
                 insertJugador()
+                finish()
             }
 
             private fun insertJugador() {
@@ -96,23 +133,24 @@ class EditarJugador: AppCompatActivity() {
                 val puntos = Integer.parseInt(binding.PuntosEdit.text.toString())
 
                 val sql = "UPDATE Jugadores SET 'nombre' = $nombre, 'precio' = $precio, 'posicion' = $posicion, 'puntos' = $puntos WHERE 'codigo' = $codigo"
-                db.execSQL(sql)
+                dataBase.execSQL(sql)
 
                 val jugador = Jugador(
                     Integer.parseInt(binding.CodigoEdit.text.toString()),
                     binding.NombreEdit.text.toString(),
+                    Integer.parseInt(binding.PrecioEdit.text.toString()),
                     binding.PosicionesJ.selectedItem.toString()
                         .substring(0, (binding.PosicionesJ.selectedItem.toString().length - 5)),
-                    Integer.parseInt(binding.PrecioEdit.text.toString()),
                     Integer.parseInt(binding.PuntosEdit.text.toString())
                 )
                 //Esto es el equivalente a hacer listaJugadoresEditable.set(Index, Objeto)
-                listaJugadoresEditable[Integer.parseInt(binding.CodigoEdit.text.toString())-1] = jugador
+                updater.add(jugador)
                 adapter.notifyItemChanged(Integer.parseInt(binding.CodigoEdit.text.toString())-1)
             }
         })
         builder.setNegativeButton("No") {_,_ -> finish()}
         builder.setNeutralButton("Cancelar") {dialog, _ -> dialog.dismiss()}
-
     }
+
+
 }

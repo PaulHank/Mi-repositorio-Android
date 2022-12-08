@@ -1,6 +1,8 @@
 package com.liceolapaz.dam.pae
 
 import android.content.Intent
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +11,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.liceolapaz.dam.pae.jugador.JugadorProvider.Companion.listaJugadores
 import com.liceolapaz.dam.pae.databinding.DbBinding
 import com.liceolapaz.dam.pae.jugador.Jugador
 import com.liceolapaz.dam.pae.jugador.JugadorAdapter
@@ -20,23 +21,44 @@ import com.liceolapaz.dam.pae.jugador.JugadorAdapter
 class DB: AppCompatActivity() {
 
     private lateinit var binding: DbBinding
-    private var listaJugadoresEditable:MutableList<Jugador> = listaJugadores.toMutableList()
+    var listaJugadores: List<Jugador> = mutableListOf()
     private lateinit var adapter: JugadorAdapter
+    private lateinit var db : SQLiteDatabase
 
     private fun initRecyclerView(){
-        adapter = JugadorAdapter(listaJugadores = listaJugadoresEditable,
+        loadContentFromDB()
+        adapter = JugadorAdapter(listaJugadores = listaJugadores,
         onClickListener = { jugador ->  onJugadorSelected(jugador) })
-
 
         val mana = LinearLayoutManager(this)
         val decoration = DividerItemDecoration(this, mana.orientation)
         binding.JugadoresRecyclerView.layoutManager = mana
         binding.JugadoresRecyclerView.addItemDecoration(decoration)
-
         binding.JugadoresRecyclerView.adapter = adapter
     }
 
-    private  fun onJugadorSelected(jugador: Jugador) {
+    private fun loadContentFromDB(): List<Jugador> {
+        val bdd = BaseDeDatos(this, "BaseDeJugadores", null, 1)
+        db = bdd.writableDatabase
+
+        val cursor : Cursor = db.rawQuery("SELECT * FROM Jugadores",null)
+        if (cursor.moveToFirst()) {
+            do {
+                val codigo = cursor.getInt(0)
+                val nombre = cursor.getString(1)
+                val precio = cursor.getInt(2)
+                val posicion = cursor.getString(3)
+                val puntos = cursor.getInt(4)
+                val jugador = Jugador(codigo,nombre, precio, posicion,puntos)
+                listaJugadores += jugador
+            }
+            while(cursor.moveToNext())
+        }
+        db.close()
+        return listaJugadores
+    }
+
+    private fun onJugadorSelected(jugador: Jugador) {
         Toast.makeText(this,jugador.nombre, Toast.LENGTH_SHORT).show()
         val intent = Intent(this@DB, EditarJugador::class.java)
         startActivity(intent)
