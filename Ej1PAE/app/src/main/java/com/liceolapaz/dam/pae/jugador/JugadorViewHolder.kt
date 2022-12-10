@@ -7,11 +7,11 @@ import com.liceolapaz.dam.pae.R
 
 class JugadorViewHolder(view:View):RecyclerView.ViewHolder(view){
 
-    private val codigoJu : TextView = view.findViewById(R.id.CodigoJugador)
-    private val nombreJu: TextView = view.findViewById(R.id.NombreJugador)
-    private val precioJu: TextView = view.findViewById(R.id.PrecioJugador)
-    private val posicionJu: TextView = view.findViewById(R.id.PosicionJugador)
-    private val puntosJu: TextView = view.findViewById(R.id.PuntosJugador)
+    val codigoJu : TextView = view.findViewById(R.id.CodigoJugador)
+    val nombreJu: TextView = view.findViewById(R.id.NombreJugador)
+    val precioJu: TextView = view.findViewById(R.id.PrecioJugador)
+    val posicionJu: TextView = view.findViewById(R.id.PosicionJugador)
+    val puntosJu: TextView = view.findViewById(R.id.PuntosJugador)
 
     fun noseque(
         jugadorAlgo: Jugador,
@@ -23,6 +23,7 @@ class JugadorViewHolder(view:View):RecyclerView.ViewHolder(view){
         posicionJu.text = jugadorAlgo.posicion
         puntosJu.text = jugadorAlgo.puntos.toString() + " puntos"
         itemView.setOnClickListener {onClickListener(jugadorAlgo)}
+
     }
 
 }

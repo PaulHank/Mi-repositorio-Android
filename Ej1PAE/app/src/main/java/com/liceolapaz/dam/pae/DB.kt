@@ -1,5 +1,6 @@
 package com.liceolapaz.dam.pae
 
+import android.view.View
 import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
@@ -12,8 +13,10 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.liceolapaz.dam.pae.databinding.DbBinding
+import com.liceolapaz.dam.pae.databinding.JugadorItemBinding
 import com.liceolapaz.dam.pae.jugador.Jugador
 import com.liceolapaz.dam.pae.jugador.JugadorAdapter
+import com.liceolapaz.dam.pae.jugador.JugadorViewHolder
 
 // C:\users\minicuenta\appdata\local\android\sdk\platform-tools
 // adb connect localhost:5555
@@ -28,8 +31,8 @@ class DB: AppCompatActivity() {
     private fun initRecyclerView(){
         loadContentFromDB()
         adapter = JugadorAdapter(listaJugadores = listaJugadores,
-        onClickListener = { jugador ->  onJugadorSelected(jugador) })
-
+        onClickListener = { jugador -> onJugadorSelected(jugador)
+        })
         val mana = LinearLayoutManager(this)
         val decoration = DividerItemDecoration(this, mana.orientation)
         binding.JugadoresRecyclerView.layoutManager = mana
@@ -59,8 +62,13 @@ class DB: AppCompatActivity() {
     }
 
     private fun onJugadorSelected(jugador: Jugador) {
-        Toast.makeText(this,jugador.nombre, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,jugador.posicion, Toast.LENGTH_SHORT).show()
         val intent = Intent(this@DB, EditarJugador::class.java)
+        intent.putExtra("Codigo", jugador.codigo.toString())
+        intent.putExtra("Nombre", jugador.nombre)
+        intent.putExtra("Precio", jugador.precio.toString())
+        intent.putExtra("Posicion", jugador.posicion)
+        intent.putExtra("Puntos", jugador.puntos.toString())
         startActivity(intent)
     }
 
