@@ -2,6 +2,7 @@ package com.liceolapaz.dam.pae
 
 import android.app.Activity
 import android.content.DialogInterface
+import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,8 +15,6 @@ import com.liceolapaz.dam.pae.jugador.JugadorAdapter
 class CrearJugador: AppCompatActivity() {
 
     private lateinit var binding: CrearJugadorBinding
-    private var updater = DB().listaJugadores.toMutableList()
-    private lateinit var adapter: JugadorAdapter
     private lateinit var db: SQLiteDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,28 +83,18 @@ class CrearJugador: AppCompatActivity() {
         builder.setPositiveButton("Si", object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface, which: Int) {
                 insertJugador()
+                val intent = Intent(this@CrearJugador, DB::class.java)
+                startActivity(intent)
             }
 
             private fun insertJugador() {
-                val codigo = binding.CodigoEdit.text
                 val nombre = binding.NombreEdit.text.toString()
                 val precio = binding.PrecioEdit.text.toString()
                 val posicion = binding.PosicionesJ.selectedItem.toString()
                 val puntos = binding.PuntosEdit.text.toString()
 
-                val sql = "INSERT INTO Jugadores (codigo,nombre,precio,posicion,puntos) VALUES ('$codigo','$nombre','$precio','$posicion','$puntos')"
+                val sql = "INSERT INTO Jugadores (nombre,precio,posicion,puntos) VALUES ('$nombre','$precio','$posicion','$puntos')"
                 db.execSQL(sql)
-
-                val jugador = Jugador(
-                    Integer.parseInt(binding.CodigoEdit.text.toString()),
-                    binding.NombreEdit.text.toString(),
-                    Integer.parseInt(binding.PrecioEdit.text.toString()),
-                    binding.PosicionesJ.selectedItem.toString()
-                        .substring(0, (binding.PosicionesJ.selectedItem.toString().length - 5)),
-                    Integer.parseInt(binding.PuntosEdit.text.toString())
-                )
-                updater.add(jugador)
-                adapter.notifyItemInserted(updater.size-1)
             }
         })
         .setNegativeButton("No") { _, _ -> finish() }
